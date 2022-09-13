@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('answer');
             $table->bigInteger('question_id')->unsigned()->nullable();
             $table->foreign('question_id')->references('id')->on('questions');
-            $table->bigInteger('customers_id')->unsigned()->nullable();
-            $table->foreign('customers_id')->references('id')->on('customers');
+            $table->bigInteger('customer_id')->unsigned()->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();
         });
     }

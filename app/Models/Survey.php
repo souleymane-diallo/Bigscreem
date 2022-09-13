@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Survey extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'title'
+    ];
+    /**
+     * Relation survey has many questions
+     *
+     * @return Question
+     */
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
 }
