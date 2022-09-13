@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'email'
+    ];
+    /**
+     * Relation customer has many answers
+     *
+     * @return Answer
+     */
+    public function answers() {
+        return $this->hasMany(Answer::class);
+    }
 }
