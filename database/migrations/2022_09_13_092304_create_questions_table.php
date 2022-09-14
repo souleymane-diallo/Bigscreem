@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('body');
-            $table->string('type');
-            $table->string('possible_answer');
+            $table->enum('type', ['A', 'B', 'C']);
+            $table->string('possible_answer',255)->nullable();
             $table->bigInteger('survey_id')->unsigned()->nullable();
             $table->foreign('survey_id')->references('id')->on('surveys');
             $table->timestamps();
