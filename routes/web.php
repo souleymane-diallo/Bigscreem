@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AnswerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,10 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [FrontController::class, 'index']);
+Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::resource('answer', AnswerController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+
+
