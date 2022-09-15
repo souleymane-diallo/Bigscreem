@@ -15,7 +15,7 @@ use App\Http\Controllers\AnswerController;
 */
 
 
-Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::get('/', [FrontController::class, 'index']);
 Route::resource('answer', AnswerController::class);
 
 Route::get('/dashboard', function () {

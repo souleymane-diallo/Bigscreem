@@ -45,6 +45,7 @@ class AnswerController extends Controller
             'answerC.*' => 'required|regex:/[1-5]/'
         ]);
 
+
         $answers = array_replace( $request->email, $request->answerA, $request->answerB, $request->answerC );
 
         ksort($answers);
@@ -70,6 +71,7 @@ class AnswerController extends Controller
         // cette adresse:<a href='".url("/$single_link")."'/>" . url("/$single_link") . " </a>");
 
     }
+
 
 
     /**

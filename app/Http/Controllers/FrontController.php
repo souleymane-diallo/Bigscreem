@@ -17,7 +17,6 @@ class FrontController extends Controller
     {
         //
         $questions = Question::all();
-
         return view('front.index', compact('questions'));
     }
     public function answers(string $single_link) {
