@@ -19,4 +19,15 @@ class FrontController extends Controller
 
         return view('front.index', compact('questions'));
     }
+
+    /**
+     * Show response survey
+     *
+     * @return void
+     */
+    public function answer(string $url)
+    {
+        //$question = Question::find($id);
+        return view('front.answer');
+    }
 }
