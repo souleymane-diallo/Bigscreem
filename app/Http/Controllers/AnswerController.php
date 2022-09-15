@@ -36,7 +36,7 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        $single_link = Str::uuid()->toString();
+        // $single_link = Str::uuid()->toString();
 
         $this->validate($request, [
             'email.*'     => 'required|email',
@@ -51,17 +51,23 @@ class AnswerController extends Controller
 
         foreach ($answers as $key => $value) {
             Answer::create([
-                'answer'      => $value,
                 'question_id'   => $key,
-                'hash_path'     => $single_link
+                'answer'      => $value,
+                // 'single_link' => $single_link
             ]);
         }
 
-        return redirect()->route('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
-        votre investissement, nous vous préparons une application toujours plus
-        facile à utiliser, seul ou en famille.
-        Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-        cette adresse:<a href='".url("/$single_link")."'/>" . url("/$single_link") . " </a>");
+         return redirect()->route('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+         votre investissement, nous vous préparons une application toujours plus
+         facile à utiliser, seul ou en famille.
+         Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+         cette adresse:<a href='");
+
+        // return redirect()->route('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+        // votre investissement, nous vous préparons une application toujours plus
+        // facile à utiliser, seul ou en famille.
+        // Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+        // cette adresse:<a href='".url("/$single_link")."'/>" . url("/$single_link") . " </a>");
 
     }
 
