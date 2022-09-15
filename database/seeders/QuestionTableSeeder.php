@@ -37,8 +37,8 @@ class QuestionTableSeeder extends Seeder
             [ 'title'=>'Question 15/20','body'=>'Combien donnez-vous de point pour la qualité audio dans Bigscreen ?','type'=>'C','possible_answer'=>'1, 2, 3, 4, 5','check_email'=>false,'survey_id'=>1],
             [ 'title'=>'Question 16/20','body'=>'Aimeriez vous avoir des notifications plus précises au cours de vos sessions Bigscreen ?','type'=>'A','possible_answer'=>'Oui, Non','check_email'=>false,'survey_id'=>1],
             [ 'title'=>'Question 17/20','body'=>'Aimeriez vous pouvoir inviter un ami à rejoindre votre session via son smartphone ?','type'=>'A','possible_answer'=>'Oui, Non','check_email'=>false,'survey_id'=>1],
-            [ 'title'=>'Question 18/20','body'=>'Aimeriez vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?','type'=>'C','possible_answer'=>'1, 2, 3, 4, 5','check_email'=>false,'survey_id'=>1],
-            [ 'title'=>'Question 19/20','body'=>'Aimeriez-vous jouer à des jeux exclusifs sur votre Bigscreen ?','type'=>'C','possible_answer'=>'1, 2, 3, 4, 5','check_email'=>false,'survey_id'=>1],
+            [ 'title'=>'Question 18/20','body'=>'Aimeriez vous pouvoir enregistrer des émissions TV pour pouvoir les regarder ultérieurement ?','type'=>'A','possible_answer'=>'Oui, Non','check_email'=>false,'survey_id'=>1],
+            [ 'title'=>'Question 19/20','body'=>'Aimeriez-vous jouer à des jeux exclusifs sur votre Bigscreen ?','type'=>'A','possible_answer'=>'Oui, Non','check_email'=>false,'survey_id'=>1],
             [ 'title'=>'Question 20/20','body'=>'Quelle nouvelle fonctionnalité devrait exister sur Bigscreen ?','type'=>'B','possible_answer'=>null,'check_email'=>false,'survey_id'=>1],
         ];
         Question::insert($question);
