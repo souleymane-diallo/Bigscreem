@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('answer');
             $table->bigInteger('question_id')->unsigned()->nullable();
             $table->foreign('question_id')->references('id')->on('questions');
+            $table->string('single_link');
             $table->bigInteger('customer_id')->unsigned()->nullable();
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();
