@@ -20,16 +20,17 @@
                                                 id="email"
                                                 class="block mt-1 w-full"
                                                 type="email"
-                                                :value="old('email')" required
+                                                 required
                                             />
                                         @else
                                             <x-text-input
                                                 name="answer{{ $question->type }}[{{ $question->id }}]"
                                                 id="answer{{ $question->id }}"
                                                 class="block mt-1 w-full"
-                                                type="email"
-                                                :value="old('email')" required
+                                                type="text"
+                                                 required
                                              />
+                                        @endif
 
                                     @else
                                         <select
