@@ -5,7 +5,7 @@
 
 @section('content')
 
-<form action="" method="POST">
+<form action="{{ route('answer.store') }}"  method="POST">
     {{ csrf_field() }}
     <div class="container" style="min-width:300px;margin:auto">
         <center>
