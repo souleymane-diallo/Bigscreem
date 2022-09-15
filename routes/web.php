@@ -14,3 +14,4 @@ use App\Http\Controllers\FrontController;
 */
 
 Route::get('/', [FrontController::class, 'index'])->name('index');
+Route::get('/{id}', [FrontController::class, 'answers'])->where('id', '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}');
