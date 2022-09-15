@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('body');
             $table->enum('type', ['A', 'B', 'C']);
             $table->string('possible_answer',255)->nullable();
+            $table->boolean('check_email')->default(false);
             $table->bigInteger('survey_id')->unsigned()->nullable();
             $table->foreign('survey_id')->references('id')->on('surveys');
             $table->timestamps();
