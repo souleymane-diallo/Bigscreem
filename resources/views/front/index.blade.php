@@ -6,8 +6,16 @@
                     <div class="mb-5">
                         <h1 class="fon-semibold text-2xl">Merci de repondre à toutes les questions et de valider le formulaire en bas de page.</h3>
                     </div>
-        
+                    @if(session('message'))
+                        <div class="alert alert-success alert-dismissible fade show" id="notif-bar" style="margin-top:8px" role="alert">
+                            {{session('message')}}
+                            <button type="button" id="close_notif" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    @endif
                     <form action="{{ route('answer.store') }}" method="POST">
+
                         @csrf
 
                             @forelse ($questions as $question)

@@ -13,11 +13,8 @@ use App\Http\Controllers\AnswerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 Route::get('/', [FrontController::class, 'index']);
 Route::get('/{id}', [FrontController::class, 'answer']);
-
 
 /*Route::prefix('administration')->name('admin.')->middleware('auth')->group(function(){
 

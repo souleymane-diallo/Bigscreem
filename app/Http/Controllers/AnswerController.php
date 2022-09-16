@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Customer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        // $single_link = Str::uuid()->toString();
+        $single_link = Str::uuid()->toString();
 
         $this->validate($request, [
             'email.*'     => 'required|email',
@@ -58,7 +59,11 @@ class AnswerController extends Controller
             ]);
         }
 
-         return redirect()->route('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+        // Customer::create([
+        //     'email'   => $request->email
+        // ]);
+
+         return redirect('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
          votre investissement, nous vous préparons une application toujours plus
          facile à utiliser, seul ou en famille.
          Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
