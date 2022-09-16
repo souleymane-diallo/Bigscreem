@@ -14,6 +14,7 @@ use App\Http\Controllers\AnswerController;
 |
 */
 Route::get('/', [FrontController::class, 'index']);
+Route::get('/message', [FrontController::class, 'message']);
 Route::get('/{id}', [FrontController::class, 'answer']);
 
 /*Route::prefix('administration')->name('admin.')->middleware('auth')->group(function(){
