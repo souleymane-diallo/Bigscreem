@@ -36,4 +36,15 @@ class FrontController extends Controller
         //$question = Question::find($id);
         return view('front.answer');
     }
+
+      /**
+     *return the message form
+     *
+     * @return void
+     */
+    public function message()
+    {
+        //$question = Question::find($id);
+        return view('front.message');
+    }
 }
