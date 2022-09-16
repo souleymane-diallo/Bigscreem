@@ -37,6 +37,7 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
+
         $single_link = Str::uuid()->toString();
 
         $this->validate($request, [
@@ -45,7 +46,6 @@ class AnswerController extends Controller
             'answerB.*' => 'required|min:1|max:255',
             'answerC.*' => 'required|regex:/[1-5]/'
         ]);
-
 
         $answers = array_replace( $request->email, $request->answerA, $request->answerB, $request->answerC );
 
@@ -63,11 +63,11 @@ class AnswerController extends Controller
         //     'email'   => $request->email
         // ]);
 
-         return redirect('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+         return redirect('/message')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
          votre investissement, nous vous préparons une application toujours plus
          facile à utiliser, seul ou en famille.
          Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-         cette adresse:<a href='");
+         cette adresse:");
 
         // return redirect()->route('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
         // votre investissement, nous vous préparons une application toujours plus
