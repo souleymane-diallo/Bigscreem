@@ -55,25 +55,21 @@ class AnswerController extends Controller
             Answer::create([
                 'question_id'   => $key,
                 'answer'      => $value,
-                // 'single_link' => $single_link
+                'single_link' => $single_link
             ]);
         }
 
         // Customer::create([
         //     'email'   => $request->email
         // ]);
-
-         return redirect('/message')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
-         votre investissement, nous vous préparons une application toujours plus
-         facile à utiliser, seul ou en famille.
-         Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-         cette adresse:");
-
-        // return redirect()->route('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
-        // votre investissement, nous vous préparons une application toujours plus
-        // facile à utiliser, seul ou en famille.
-        // Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-        // cette adresse:<a href='".url("/$single_link")."'/>" . url("/$single_link") . " </a>");
+        // return redirect()->action([FrontController::class, 'message'], ['url' => $single_link ]);
+        // return redirect()->route('message', ['url' => $single_link ]);
+          return redirect('/message')->with('url', $single_link);
+        //  return redirect('/message')->with("ur","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+        //  votre investissement, nous vous préparons une application toujours plus
+        //  facile à utiliser, seul ou en famille.
+        //  Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+        //  cette adresse:<br> <a href='".url("/$single_link")."'/>" . url("/$single_link") . " </a>");
 
     }
 
