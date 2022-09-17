@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <img src="{{ asset('image/bigscreen_logo.png') }}" alt="logo BigScreen" width=300>
             </a>
         </x-slot>
 
@@ -51,7 +51,7 @@
                 </a>
 
                 <x-primary-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __("S'enregistrer") }}
                 </x-primary-button>
             </div>
         </form>
