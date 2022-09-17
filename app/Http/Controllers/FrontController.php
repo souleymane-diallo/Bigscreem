@@ -31,9 +31,9 @@ class FrontController extends Controller
      *
      * @return void
      */
-    public function answer(string $url)
+    public function answer(int $id)
     {
-        //$question = Question::find($id);
-        return view('front.answer');
+        $question = Question::find($id);
+        return view('front.answer', compact('question'));
     }
 }
