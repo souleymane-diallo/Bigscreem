@@ -42,5 +42,6 @@ class FrontController extends Controller
     public function message()
     {
         return view('front.message');
+
     }
 }

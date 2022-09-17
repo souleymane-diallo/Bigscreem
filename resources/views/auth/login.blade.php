@@ -1,9 +1,9 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Bigscreen') }}
-            </h2>
+            <a href="/">
+                <img src="{{ asset('image/bigscreen_logo.png') }}" alt="logo BigScreen" width=300>
+            </a>
         </x-slot>
 
         <!-- Session Status -->

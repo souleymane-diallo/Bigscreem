@@ -15,7 +15,11 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+            @if(Route::is('administration') == false)
+                @include('layouts.navigation')
+            @else
+                @include('layouts.navigation')
+            @endif
 
             <!-- Page Content -->
             <main>
