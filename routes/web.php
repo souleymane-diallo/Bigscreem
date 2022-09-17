@@ -3,6 +3,8 @@
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnswerController;
+use App\Http\Controllers\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,17 +18,15 @@ use App\Http\Controllers\AnswerController;
 
 
 Route::get('/', [FrontController::class, 'index']);
-Route::get('/{id}', [FrontController::class, 'answer']);
+Route::get('answer/{id}', [FrontController::class, 'answer']);
 
+Route::get('/administration', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('administration')
+;
 
-/*Route::prefix('administration')->name('admin.')->middleware('auth')->group(function(){
-
-});*/
 Route::resource('answer', AnswerController::class);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
