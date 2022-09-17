@@ -12,7 +12,8 @@ class Answer extends Model
     protected $fillable = [
         'answer',
         'question_id',
-        'customer_id'
+        'customer_id',
+        'single_link'
     ];
 
     /**
@@ -33,5 +34,10 @@ class Answer extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    public function scopeHashPath($query, $single_link) {
+
+        return $query->where('single_link',$single_link);
     }
 }
