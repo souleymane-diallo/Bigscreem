@@ -18,23 +18,20 @@ class FrontController extends Controller
         //
         $questions = Question::all();
         return view('front.index', compact('questions'));
-    }
-    public function answers(string $single_link) {
-        $questions = Question::all();
-        $answers = Answer::hashPath($single_link)->pluck('response', 'question_id');
 
-        return view('front.answer', ['questions' => $questions, 'answers' => $answers]);
     }
-
-    /**
+     /**
      * Show response survey
      *
      * @return void
      */
-    public function answer(string $url)
-    {
-        //$question = Question::find($id);
-        return view('front.answer');
+    public function answers(string $single_link) {
+        $questions = Question::all();
+
+        $answers = Answer::HashPath($single_link)->pluck('answer', 'question_id');
+
+
+        return view('front.answer', ['questions' => $questions, 'answers' => $answers]);
     }
 
       /**
@@ -44,7 +41,6 @@ class FrontController extends Controller
      */
     public function message()
     {
-        //$question = Question::find($id);
         return view('front.message');
     }
 }
