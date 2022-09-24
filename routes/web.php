@@ -20,10 +20,11 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [FrontController::class, 'index']);
 Route::get('answer/{id}', [FrontController::class, 'answer']);
 
-Route::get('/administration', [DashboardController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('administration')
-;
+Route::prefix('administration')->name('administration.')->middleware('auth')->group(function (){
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/questions', [DashboardController::class, 'questions']);
+    Route::get('/answers', [DashboardController::class, 'answers']);
+});
 
 Route::resource('answer', AnswerController::class);
 
