@@ -22,7 +22,7 @@ Route::get('answer/{id}', [FrontController::class, 'answer']);
 
 Route::prefix('administration')->name('administration.')->middleware('auth')->group(function (){
     Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/questions', [DashboardController::class, 'questions']);
+    Route::get('/questions', [DashboardController::class, 'questionnaires']);
     Route::get('/answers', [DashboardController::class, 'answers']);
 });
 
