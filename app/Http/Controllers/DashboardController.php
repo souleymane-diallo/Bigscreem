@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -17,13 +18,15 @@ class DashboardController extends Controller
     }
 
     /**
-     * Undocumented function
+     * get all questions
      *
-     * @return void
      */
-    public function questions()
+
+    public function questionnaires()
     {
-        return view('back.questions');
+        $questions = Question::all();
+
+        return view('back.questions', compact('questions'));
     }
 
     /**
