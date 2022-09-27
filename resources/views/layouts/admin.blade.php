@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{{asset('css/favicon.png')}}">
 
-    <title>WeFashion Backend</title>
+    <title>Bigscreen Backend</title>
 
 
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">

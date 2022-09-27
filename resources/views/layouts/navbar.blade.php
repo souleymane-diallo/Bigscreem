@@ -22,7 +22,7 @@
                                         {{ __('Connexion') }}
                                     </x-primary-button>
                                 </a>
-                                @if (Route::has('register'))
+                                @if (route::has('register'))
                                     <a href="{{ route('register') }}" >
                                         <x-primary-button class="ml-3">
                                             {{ __("S'enregistrer") }}
