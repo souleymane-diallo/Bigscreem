@@ -18,14 +18,14 @@ use App\Http\Controllers\ChartController;
 */
 Route::get('/', [FrontController::class, 'index']);
 Route::get('/message', [FrontController::class, 'message']);
-Route::get('/{url}', [FrontController::class, 'answers']);
+Route::get('/{url}', [FrontController::class, 'answers'])->where('id', '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}');
 Route::get('/pie', [ChartController::class, 'index']);
 
 
 
 Route::prefix('administration')->name('administration.')->middleware('auth')->group(function (){
     Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/questions', [DashboardController::class, 'questions']);
+    Route::get('/questions', [DashboardController::class, 'questionnaires']);
     Route::get('/answers', [DashboardController::class, 'answers']);
 });
 
