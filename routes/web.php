@@ -15,10 +15,11 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 Route::get('/', [FrontController::class, 'index']);
-Route::get('answer/{id}', [FrontController::class, 'answer']);
+Route::get('message', [FrontController::class, 'message']);
+Route::get('/{url}', [FrontController::class, 'answers']);
+
+
 
 Route::prefix('administration')->name('administration.')->middleware('auth')->group(function (){
     Route::get('/', [DashboardController::class, 'index']);

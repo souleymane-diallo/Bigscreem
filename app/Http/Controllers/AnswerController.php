@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Customer;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,8 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        // $single_link = Str::uuid()->toString();
+
+        $single_link = Str::uuid()->toString();
 
         $this->validate($request, [
             'email.*'     => 'required|email',
@@ -44,7 +46,6 @@ class AnswerController extends Controller
             'answerB.*' => 'required|min:1|max:255',
             'answerC.*' => 'required|regex:/[1-5]/'
         ]);
-
 
         $answers = array_replace( $request->email, $request->answerA, $request->answerB, $request->answerC );
 
@@ -54,21 +55,21 @@ class AnswerController extends Controller
             Answer::create([
                 'question_id'   => $key,
                 'answer'      => $value,
-                // 'single_link' => $single_link
+                'single_link' => $single_link
             ]);
         }
 
-         return redirect()->route('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
-         votre investissement, nous vous préparons une application toujours plus
-         facile à utiliser, seul ou en famille.
-         Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-         cette adresse:<a href='");
-
-        // return redirect()->route('/')->with("message","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
-        // votre investissement, nous vous préparons une application toujours plus
-        // facile à utiliser, seul ou en famille.
-        // Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-        // cette adresse:<a href='".url("/$single_link")."'/>" . url("/$single_link") . " </a>");
+        // Customer::create([
+        //     'email'   => $request->email
+        // ]);
+        // return redirect()->action([FrontController::class, 'message'], ['url' => $single_link ]);
+        // return redirect()->route('message', ['url' => $single_link ]);
+          return redirect('/message')->with('url', $single_link);
+        //  return redirect('/message')->with("ur","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
+        //  votre investissement, nous vous préparons une application toujours plus
+        //  facile à utiliser, seul ou en famille.
+        //  Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
+        //  cette adresse:<br> <a href='".url("/$single_link")."'/>" . url("/$single_link") . " </a>");
 
     }
 

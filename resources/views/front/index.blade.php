@@ -6,15 +6,15 @@
                     <div class="mb-2">
                         <img src="{{ asset('image/bigscreen_logo.png') }}" alt="logo BigScreen" width=250 />
                     </div>
+
                     <div class="mb-5">
                         <h1 class="fon-semibold text-1xl text-white">Merci de repondre à toutes les questions et de valider le formulaire en bas de page.</h3>
                     </div>
                     <!-- Erreurs de validation -->
                     <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                    
+
                     <form action="{{ route('answer.store') }}" method="POST">
                         @csrf
-
                             @forelse ($questions as $question)
                             <div class="bg-gray-200 p-2 my-2 rounded-md shadow-sm">
                                 <h3 class="font-semibold">{{ $question->title }}</h3>
@@ -49,7 +49,7 @@
                                         >
                                             <option value="">--- Selectionnez votre réponse ----</option>
                                             @foreach (explode(',', $question->possible_answer) as $answer)
-                                                <option 
+                                                <option
                                                     @selected(old('possible_answer'))
                                                     value="{{ $answer }}"
                                                 >
