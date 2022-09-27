@@ -46,18 +46,54 @@ class AnswerController extends Controller
             'answerB.*' => 'required|min:1|max:255',
             'answerC.*' => 'required|regex:/[1-5]/'
         ]);
+        // dd("verification des informations récupérées", $request->email, $request->answerA, $request->answerB, $request->answerC);
+        $email = $request->email;
+        foreach ($email as $key => $value) {
+            $emailId= Customer::all()->where("answer",$value)->pluck("id")->implode('0 => ', );
+            }
+        //dd("id de l'email",$emailId);
+        if($emailId){
 
-        $answers = array_replace( $request->email, $request->answerA, $request->answerB, $request->answerC );
+            $answers = array_replace( $request->email, $request->answerA, $request->answerB, $request->answerC );
+            ksort($answers);
 
-        ksort($answers);
+            foreach ($answers as $key => $value) {
+                Answer::create([
+                    'question_id'   => $key,
+                    'answer'      => $value,
+                    'single_link' => $single_link
+                ]);
+            }
 
-        foreach ($answers as $key => $value) {
-            Answer::create([
-                'question_id'   => $key,
-                'answer'      => $value,
-                'single_link' => $single_link
-            ]);
-        }
+        }else{
+            // dd("pas d'id de l'email");
+            $emailValue = $request->email;
+            foreach ($emailValue as $key => $value) {
+                Customer::create([
+                    'email' => $value,
+                ]);
+            }
+            foreach ($emailValue as $key => $value) {
+            $customerId = Customer::all()->where("email", $value)->pluck("id")->implode('0 => ', );
+            }
+            // dd("valeur de customerId",$customerId);
+
+            $answers = array_replace( $request->email, $request->answerA, $request->answerB, $request->answerC );
+            ksort($answers);
+            // dd("$customerId", $customerId);
+            foreach ($answers as $key => $value) {
+                Answer::create([
+                    'question_id'   => $key,
+                    'answer'      => $value,
+                    'single_link' => $single_link,
+                    'customer_id' => $customerId
+                ]);
+            }
+
+    }
+
+
+
 
         // Customer::create([
         //     'email'   => $request->email
