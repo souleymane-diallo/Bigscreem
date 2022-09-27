@@ -4,6 +4,7 @@ use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,8 @@ use App\Http\Controllers\DashboardController;
 */
 Route::get('/', [FrontController::class, 'index']);
 Route::get('message', [FrontController::class, 'message']);
-Route::get('/{url}', [FrontController::class, 'answers']);
+// Route::get('/{url}', [FrontController::class, 'answers']);
+Route::get('/pie', [ChartController::class, 'index']);
 
 
 
