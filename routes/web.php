@@ -17,8 +17,8 @@ use App\Http\Controllers\ChartController;
 |
 */
 Route::get('/', [FrontController::class, 'index']);
-Route::get('message', [FrontController::class, 'message']);
-// Route::get('/{url}', [FrontController::class, 'answers']);
+Route::get('/message', [FrontController::class, 'message']);
+Route::get('/{url}', [FrontController::class, 'answers']);
 Route::get('/pie', [ChartController::class, 'index']);
 
 

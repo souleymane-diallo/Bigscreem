@@ -49,12 +49,12 @@ class AnswerController extends Controller
         // dd("verification des informations récupérées", $request->email, $request->answerA, $request->answerB, $request->answerC);
         $email = $request->email;
         foreach ($email as $key => $value) {
-            $emailId= Customer::all()->where("answer",$value)->pluck("id")->implode('0 => ', );
-            }
+            $emailId = Customer::all()->where("answer", $value)->pluck("id")->implode('0 => ',);
+        }
         //dd("id de l'email",$emailId);
-        if($emailId){
+        if ($emailId) {
 
-            $answers = array_replace( $request->email, $request->answerA, $request->answerB, $request->answerC );
+            $answers = array_replace($request->email, $request->answerA, $request->answerB, $request->answerC);
             ksort($answers);
 
             foreach ($answers as $key => $value) {
@@ -64,8 +64,7 @@ class AnswerController extends Controller
                     'single_link' => $single_link
                 ]);
             }
-
-        }else{
+        } else {
             // dd("pas d'id de l'email");
             $emailValue = $request->email;
             foreach ($emailValue as $key => $value) {
@@ -74,11 +73,11 @@ class AnswerController extends Controller
                 ]);
             }
             foreach ($emailValue as $key => $value) {
-            $customerId = Customer::all()->where("email", $value)->pluck("id")->implode('0 => ', );
+                $customerId = Customer::all()->where("email", $value)->pluck("id")->implode('0 => ',);
             }
             // dd("valeur de customerId",$customerId);
 
-            $answers = array_replace( $request->email, $request->answerA, $request->answerB, $request->answerC );
+            $answers = array_replace($request->email, $request->answerA, $request->answerB, $request->answerC);
             ksort($answers);
             // dd("$customerId", $customerId);
             foreach ($answers as $key => $value) {
@@ -89,18 +88,16 @@ class AnswerController extends Controller
                     'customer_id' => $customerId
                 ]);
             }
-
-    }
-
-
-
-
+        }
+        // dd("avant la redirection");
+        return redirect('/message')->with('url', $single_link);
+        dd("après la redirection");
         // Customer::create([
         //     'email'   => $request->email
         // ]);
         // return redirect()->action([FrontController::class, 'message'], ['url' => $single_link ]);
         // return redirect()->route('message', ['url' => $single_link ]);
-          return redirect('/message')->with('url', $single_link);
+        //   return redirect('/message')->with('url', $single_link);
         //  return redirect('/message')->with("ur","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
         //  votre investissement, nous vous préparons une application toujours plus
         //  facile à utiliser, seul ou en famille.
@@ -119,7 +116,6 @@ class AnswerController extends Controller
      */
     public function show($id)
     {
-
     }
 
     /**
