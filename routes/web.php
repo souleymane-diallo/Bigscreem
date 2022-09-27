@@ -18,7 +18,7 @@ use App\Http\Controllers\ChartController;
 */
 Route::get('/', [FrontController::class, 'index']);
 Route::get('/message', [FrontController::class, 'message']);
-Route::get('/{url}', [FrontController::class, 'answers'])->where('id', '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}');
+Route::get('/{url}', [FrontController::class, 'answers'])->where('url', '[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}');
 Route::get('/pie', [ChartController::class, 'index']);
 
 
