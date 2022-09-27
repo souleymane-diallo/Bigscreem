@@ -14,17 +14,30 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @if(Route::is('administration') == false)
-                @include('layouts.navigation')
-            @else
-                @include('layouts.navigation')
-            @endif
-
+      @if (Route::is('administration.*'))
+        @auth
+          <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
             <!-- Page Content -->
+          
+              @include('layouts.navigation')
+              @include('layouts.sidebar')
+            
             <main>
-                {{ $slot }}
+                <div class="h-full ml-14 mt-14 mb-10 md:ml-64">
+                  {{ $slot }}
+                </div>
             </main>
+            
+          </div>
+        @endauth
+        @else
+        <div class="flex flex-col min-h-screen bg-gray-100">
+          <main>
+            {{ $slot }}
+          </main>
         </div>
+      
+      @endif
+        
     </body>
 </html>
