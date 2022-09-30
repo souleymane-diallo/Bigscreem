@@ -37,6 +37,7 @@ class DashboardController extends Controller
          * Group all the responses to count them after
          */
         $answers = Answer::all()->where('question_id', $questionID)->groupBy('answer');
+
         $datas = [];
 
         $colors = [];
@@ -50,13 +51,16 @@ class DashboardController extends Controller
             $number = 0;
 
             if(isset($answers[$value])) {
+                //dd("test",$answers[$value]);
                 $number = $answers[$value]->count();
+
             }
 
-            array_push( $datas, $number );
+            array_push( $datas, $number);
             array_push( $colors, "#".bin2hex(openssl_random_pseudo_bytes(3)) );
         }
-        //dd($questionID,$question[0], $labels,$datas, $colors);
+
+            //  dd($questionID,$question[0], $labels,$datas, $colors);
         return array(
             "question_id" => $questionID,
             "question" => $question[0],
