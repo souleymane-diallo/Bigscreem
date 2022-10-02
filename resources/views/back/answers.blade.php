@@ -3,7 +3,7 @@
     <div class="mt-20 mx-4">
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
-
+                @forelse($answers as $answer)
                 <table class="w-full">
                     <thead>
                         <tr
@@ -13,7 +13,7 @@
                             <th class="px-4 py-3">Réponses</th>
                         </tr>
                     </thead>
-                    @forelse($answers as $answer)
+                    {{-- @forelse($answers as $answer) --}}
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @forelse($questions as $question)
                                 <tr
@@ -44,10 +44,12 @@
                                 <tr>Aucune réponse...</tr>
                             @endforelse
                         </tbody>
-                    @empty
-                        <p>Non...</p>
-                    @endforelse
+
                 </table>
+                <div  style="padding-top: 30px"></div>
+                @empty
+                <p>Non...</p>
+                @endforelse
 
             </div>
         </div>

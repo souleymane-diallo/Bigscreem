@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\Customer;
+use App\Models\Question;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\AnswerRequest;
 
 class AnswerController extends Controller
 {
@@ -32,66 +34,82 @@ class AnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\AnswerRequest   $answerRequest
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // public function store(Request $request)
+    public function store(AnswerRequest $answerRequest)
     {
 
         $single_link = Str::uuid()->toString();
 
-        $this->validate($request, [
-            'email.*'     => 'required|email',
-            'answerA.*' => 'required',
-            'answerB.*' => 'required|min:1|max:255',
-            'answerC.*' => 'required|regex:/[1-5]/'
-        ]);
-        // dd("verification des informations récupérées", $request->email, $request->answerA, $request->answerB, $request->answerC);
-        $email = $request->email;
+        // $this->validate($request, [
+        //     'email.*'     => 'required|email',
+        //     'answerA.*' => 'required',
+        //     'answerB.*' => 'required|min:1|max:255',
+        //     'answerC.*' => 'required|regex:/[1-5]/'
+        // ]);
+        $email = $answerRequest->email;
+        // dd("email",$email);
         foreach ($email as $key => $value) {
-            $emailId = Customer::all()->where("answer", $value)->pluck("id")->implode('0 => ',);
+            $email = Customer::all()->where("email", $value)->pluck("email")->implode('0 => ',);
         }
-        //dd("id de l'email",$emailId);
-        if ($emailId) {
+        // dd("email",$email);
+        if($email){
+            // dd("test reussi");
+            $questions = Question::all();
+            $mail="L'adresse email existe déjà";
+            return view('front.index', ['mail' => $mail,'questions'=> $questions]);
+        }else{
 
-            $answers = array_replace($request->email, $request->answerA, $request->answerB, $request->answerC);
-            ksort($answers);
+            // dd("verification des informations récupérées", $answerRequest->email, $answerRequest->answerA, $answerRequest->answerB, $answerRequest->answerC);
+            $email = $answerRequest->email;
+            foreach ($email as $key => $value) {
+                $emailId = Customer::all()->where("answer", $value)->pluck("id")->implode('0 => ',);
+            }
+            //dd("id de l'email",$emailId);
+            if ($emailId) {
 
-            foreach ($answers as $key => $value) {
-                Answer::create([
-                    'question_id'   => $key,
-                    'answer'      => $value,
-                    'single_link' => $single_link
-                ]);
-            }
-        } else {
-            // dd("pas d'id de l'email");
-            $emailValue = $request->email;
-            foreach ($emailValue as $key => $value) {
-                Customer::create([
-                    'email' => $value,
-                ]);
-            }
-            foreach ($emailValue as $key => $value) {
-                $customerId = Customer::all()->where("email", $value)->pluck("id")->implode('0 => ',);
-            }
-            // dd("valeur de customerId",$customerId);
+                $answers = array_replace($answerRequest->email, $answerRequest->answerA, $answerRequest->answerB, $answerRequest->answerC);
+                ksort($answers);
 
-            $answers = array_replace($request->email, $request->answerA, $request->answerB, $request->answerC);
-            ksort($answers);
-            // dd("$customerId", $customerId);
-            foreach ($answers as $key => $value) {
-                Answer::create([
-                    'question_id'   => $key,
-                    'answer'      => $value,
-                    'single_link' => $single_link,
-                    'customer_id' => $customerId
-                ]);
+                foreach ($answers as $key => $value) {
+                    Answer::create([
+                        'question_id'   => $key,
+                        'answer'      => $value,
+                        'single_link' => $single_link
+                    ]);
+                }
+            } else {
+                // dd("pas d'id de l'email");
+                $emailValue = $answerRequest->email;
+                foreach ($emailValue as $key => $value) {
+                    Customer::create([
+                        'email' => $value,
+                    ]);
+                }
+                foreach ($emailValue as $key => $value) {
+                    $customerId = Customer::all()->where("email", $value)->pluck("id")->implode('0 => ',);
+                }
+                // dd("valeur de customerId",$customerId);
+
+                $answers = array_replace($answerRequest->email, $answerRequest->answerA, $answerRequest->answerB, $answerRequest->answerC);
+                ksort($answers);
+                // dd("$customerId", $customerId);
+                foreach ($answers as $key => $value) {
+                    Answer::create([
+                        'question_id'   => $key,
+                        'answer'      => $value,
+                        'single_link' => $single_link,
+                        'customer_id' => $customerId
+                    ]);
+                }
             }
+            // dd("avant la redirection");
+            return redirect('/message')->with('url', $single_link);
+            dd("après la redirection");
         }
-        // dd("avant la redirection");
-        return redirect('/message')->with('url', $single_link);
-        dd("après la redirection");
+
         // Customer::create([
         //     'email'   => $request->email
         // ]);

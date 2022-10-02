@@ -17,7 +17,8 @@ class FrontController extends Controller
     {
         //
         $questions = Question::all();
-        return view('front.index', compact('questions'));
+        $mail="";
+        return view('front.index', compact('questions','mail'));
 
     }
      /**
@@ -29,7 +30,6 @@ class FrontController extends Controller
         $questions = Question::all();
 
         $answers = Answer::HashPath($single_link)->pluck('answer', 'question_id');
-
 
         return view('front.answer', ['questions' => $questions, 'answers' => $answers]);
     }
