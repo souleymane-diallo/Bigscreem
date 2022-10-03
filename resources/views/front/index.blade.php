@@ -39,7 +39,23 @@
                                             <span class="text-danger">test2</span>
                                         @endif
                                     @else
-                                        <select name="answer{{ $question->type }}[{{ $question->id }}]"
+                                        <div class="mb-5">
+                                            <div class="flex items-center space-x-6">
+                                                @foreach (explode(',', $question->possible_answer) as $answer)
+                                                <div class="flex items-center">
+                                                    <input type="radio" name="answer{{ $question->type }}[{{ $question->id }}]" id="radioButton1"
+                                                        class="h-5 w-5"  value="{{ $answer }}"/>
+                                                    <label for="radioButton1"
+                                                        class="pl-3 text-base font-medium text-[#07074D]">
+                                                        {{ $answer }}
+                                                    </label>
+                                                </div>
+                                                @endforeach
+
+                                            </div>
+                                        </div>
+
+                                        {{-- <select name="answer{{ $question->type }}[{{ $question->id }}]"
                                             id="answer{{ $question->id }}"
                                             class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                             <option value="">--- Selectionnez votre réponse ----</option>
@@ -52,8 +68,8 @@
                                         </select>
                                         @error('answer{{ $question->type }}[{{ $question->id }}]')
                                             <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                        <span class="text-danger">test3</span>
+                                        @enderror --}}
+
                                     @endif
                                 </div>
                             </div>
