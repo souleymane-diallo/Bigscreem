@@ -41,87 +41,44 @@ class AnswerController extends Controller
     public function store(AnswerRequest $answerRequest)
     {
 
-        $single_link = Str::uuid()->toString();
 
-        // $this->validate($request, [
-        //     'email.*'     => 'required|email',
-        //     'answerA.*' => 'required',
-        //     'answerB.*' => 'required|min:1|max:255',
-        //     'answerC.*' => 'required|regex:/[1-5]/'
-        // ]);
-        $email = $answerRequest->email;
+        $single_link = Str::uuid()->toString();
+        $email = $answerRequest->answer1;
+
         // dd("email",$email);
-        foreach ($email as $key => $value) {
-            $email = Customer::all()->where("email", $value)->pluck("email")->implode('0 => ',);
-        }
+
+        $email = Customer::all()->where("email", $email)->pluck("email")->implode('0 => ',);
+
         // dd("email",$email);
         if($email){
+            //dd("je suis dans la condition");
             // dd("test reussi");
             $questions = Question::all();
             $mail="L'adresse email existe déjà";
             return view('front.index', ['mail' => $mail,'questions'=> $questions]);
         }else{
 
-            // dd("verification des informations récupérées", $answerRequest->email, $answerRequest->answerA, $answerRequest->answerB, $answerRequest->answerC);
-            $email = $answerRequest->email;
-            foreach ($email as $key => $value) {
-                $emailId = Customer::all()->where("answer", $value)->pluck("id")->implode('0 => ',);
-            }
-            //dd("id de l'email",$emailId);
-            if ($emailId) {
+                $Customer = Customer::create([
+                    'email' => $answerRequest->answer1,
+                ]);
+                $customers = Customer::all();
+                foreach($customers as $customer) {
+                    // dd(Answer::hashPath($answer->single_link)->pluck('answer', 'question_id'));
+                    $emailId= Customer::Email($customer->email)->pluck('id');
+                }
+                $questions = Question::all();
+                foreach ($questions as $key => $question) {
+                    $answer = new Answer();
+                    $answer->answer = $answerRequest->input('answer'.$question->id);
+                    $answer->question_id = $key + 1;
+                    $answer->customer_id =$emailId[0];
+                    $answer->single_link = $single_link;
+                    $answer->save();
+                }
 
-                $answers = array_replace($answerRequest->email, $answerRequest->answerA, $answerRequest->answerB, $answerRequest->answerC);
-                ksort($answers);
-
-                foreach ($answers as $key => $value) {
-                    Answer::create([
-                        'question_id'   => $key,
-                        'answer'      => $value,
-                        'single_link' => $single_link
-                    ]);
-                }
-            } else {
-                // dd("pas d'id de l'email");
-                $emailValue = $answerRequest->email;
-                foreach ($emailValue as $key => $value) {
-                    Customer::create([
-                        'email' => $value,
-                    ]);
-                }
-                foreach ($emailValue as $key => $value) {
-                    $customerId = Customer::all()->where("email", $value)->pluck("id")->implode('0 => ',);
-                }
-                // dd("valeur de customerId",$customerId);
-
-                $answers = array_replace($answerRequest->email, $answerRequest->answerA, $answerRequest->answerB, $answerRequest->answerC);
-                ksort($answers);
-                // dd("$customerId", $customerId);
-                foreach ($answers as $key => $value) {
-                    Answer::create([
-                        'question_id'   => $key,
-                        'answer'      => $value,
-                        'single_link' => $single_link,
-                        'customer_id' => $customerId
-                    ]);
-                }
-            }
-            // dd("avant la redirection");
             return redirect('/message')->with('url', $single_link);
             dd("après la redirection");
         }
-
-        // Customer::create([
-        //     'email'   => $request->email
-        // ]);
-        // return redirect()->action([FrontController::class, 'message'], ['url' => $single_link ]);
-        // return redirect()->route('message', ['url' => $single_link ]);
-        //   return redirect('/message')->with('url', $single_link);
-        //  return redirect('/message')->with("ur","Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
-        //  votre investissement, nous vous préparons une application toujours plus
-        //  facile à utiliser, seul ou en famille.
-        //  Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-        //  cette adresse:<br> <a href='".url("/$single_link")."'/>" . url("/$single_link") . " </a>");
-
     }
 
 

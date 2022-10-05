@@ -110,11 +110,13 @@ class DashboardController extends Controller
     {
         $questions = Question::all();
         $answers = Answer::all();
+        // dd($answers);
 
         $link = [];
 
         foreach($answers as $answer) {
-            $link[$answer->single_link] = Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
+            // dd(Answer::hashPath($answer->single_link)->pluck('answer', 'question_id'));
+            $link[$answer->single_link]= Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
         }
         // dd($link);
         return view('back.answers',['answers' => $link, 'questions' => $questions]);
