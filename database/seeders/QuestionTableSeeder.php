@@ -28,8 +28,7 @@ class QuestionTableSeeder extends Seeder
             Aucun','check_email'=>false,'survey_id'=>1],
             [ 'title'=>'Question 9/20','body'=>'Au sein de votre foyer, combien de personnes utilisent votre casque VR pour regarder
             Bigscreen ?','type'=>'C','possible_answer'=>'1, 2, 3, 4, 5','check_email'=>false,'survey_id'=>1],
-            [ 'title'=>'Question 10/20','body'=>'Vous utilisez principalement Bigscreen pour','type'=>'A','possible_answer'=>'regarder la TV en direct, regarder des films, travailler,
-            jouer en solo, jouer en équipe','check_email'=>false,'survey_id'=>1],
+            [ 'title'=>'Question 10/20','body'=>'Vous utilisez principalement Bigscreen pour','type'=>'A','possible_answer'=>'regarder la TV en direct, regarder des films, travailler, jouer en solo, jouer en équipe','check_email'=>false,'survey_id'=>1],
             [ 'title'=>'Question 11/20','body'=>'Combien donnez-vous de point pour la qualité de l’image sur Bigscreen ?','type'=>'C','possible_answer'=>'1, 2, 3, 4, 5','check_email'=>false,'survey_id'=>1],
             [ 'title'=>'Question 12/20','body'=>'Combien donnez-vous de point pour le confort d’utilisation de l’interface Bigscreen ?','type'=>'C','possible_answer'=>'1, 2, 3, 4, 5','check_email'=>false,'survey_id'=>1],
             [ 'title'=>'Question 13/20','body'=>'Combien donnez-vous de point pour la connexion réseau de Bigscreen ?','type'=>'C','possible_answer'=>'1, 2, 3, 4, 5','check_email'=>false,'survey_id'=>1],
