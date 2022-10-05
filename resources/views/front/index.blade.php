@@ -35,27 +35,24 @@
                                             @enderror
                                         @endif
                                     @else
-                                        <div class="mb-5">
-                                            <div class="flex items-center space-x-6">
-                                                <?php $i=1 ?>
-                                                @foreach (explode(',', $question->possible_answer) as $answer)
+                                    <div class="mb-5">
+                                        <div class="flex items-center space-x-6">
+                                            <?php $i=1 ?>
+                                            @foreach (explode(',', $question->possible_answer) as $answer)
+                                                <div class="flex items-center">
+                                                    <input type="radio" name="answer{{ $question->id }}" value="{{ $i }}" {{(old('answer'.($question->id)) ==  $i ) ? 'checked' : " " }}
 
-
-                                                    <div class="flex items-center">
-                                                        <input type="radio" name="answer{{ $question->id }}" value="{{ $i }}" {{(old('answer'.($question->id)) ==  $i ) ? 'checked' : " " }}
-
-                                                            id="radioButton1" class="h-5 w-5" />
-                                                        <label for="radioButton1"
-                                                            class="pl-3 text-base font-medium text-[#07074D]">
-                                                           {{ $answer }} {{old('item'.($question->id))}}
-                                                        </label>
-                                                    </div>
-                                                    <?php $i++ ?>
-                                                @endforeach
-
-                                            </div>
-
+                                                        id="radioButton1" class="h-5 w-5" />
+                                                    <label for="radioButton1"
+                                                        class="pl-3 text-base font-medium text-[#07074D]">
+                                                       {{ $answer }}
+                                                    </label>
+                                                </div>
+                                                <?php $i++ ?>
+                                            @endforeach
                                         </div>
+
+                                    </div>
                                         @error("answer".($question->id))
                                                 <span class="text-danger" style="color: red">{{ $message }}</span>
                                         @enderror
