@@ -10,12 +10,10 @@
                         <h1 class="fon-semibold text-1xl text-white">Merci de repondre à toutes les questions et de
                             valider le formulaire en bas de page.</h3>
                     </div>
-                    <!-- Erreurs de validation -->
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
                     <form action="{{ route('answer.store') }}" method="POST">
                         @csrf
                         @forelse ($questions as $question)
+
                             <div class="bg-gray-200 p-2 my-2 rounded-md shadow-sm">
                                 <h3 class="font-semibold">{{ $question->title }}</h3>
                                 <p> {{ $question->body }} </p>
@@ -23,38 +21,46 @@
                                     @if ($question->type === 'B')
                                         @if ($question->check_email)
                                             <span style="color:red">{{ $mail }}</span>
-                                            <x-text-input name="email[{{ $question->id }}]" id="email"
-                                                :value="old('email[{{ $question->id }}]')" class="block mt-1 w-full" type="email" />
-                                            @error('email[{{ $question->id }}]')
-                                                <span class="text-danger"></span>
-                                            @enderror
-                                            <span class="text-danger">test1</span>
+                                            <x-text-input name="answer{{ $question->id }}"
+                                                :value="old('answer1')" class="block mt-1 w-full" type="email" />
+                                                @error("answer".($question->id))
+                                                    <span class="text-danger" style="color: red">{{ $message }}</span>
+                                                @enderror
                                         @else
-                                            <x-text-input name="answer{{ $question->type }}[{{ $question->id }}]"
+                                            <x-text-input name="answer{{ $question->id }}"
                                                 id="answer{{ $question->id }}" class="block mt-1 w-full" type="text"
-                                                :value="old('answer{{ $question->type }}[{{ $question->id }}]')" r />
-                                            @error('answer{{ $question->type }}[{{ $question->id }}]')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                :value="old('answer'.($question->id))"/>
+                                            @error("answer".($question->id))
+                                                <span class="text-danger" style="color: red">{{ $message }}</span>
                                             @enderror
-                                            <span class="text-danger">test2</span>
                                         @endif
                                     @else
-                                        <select name="answer{{ $question->type }}[{{ $question->id }}]"
-                                            id="answer{{ $question->id }}"
-                                            class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                            <option value="">--- Selectionnez votre réponse ----</option>
-                                            @foreach (explode(',', $question->possible_answer) as $answer)
-                                                <option @selected(old('possible_answer')) value="{{ $answer }}">
-                                                    {{ $answer }}
-                                                </option>
-                                            @endforeach
+                                        <div class="mb-5">
+                                            <div class="flex items-center space-x-6">
+                                                <?php $i=1 ?>
+                                                @foreach (explode(',', $question->possible_answer) as $answer)
 
-                                        </select>
-                                        @error('answer{{ $question->type }}[{{ $question->id }}]')
-                                            <span class="text-danger">{{ $message }}</span>
+
+                                                    <div class="flex items-center">
+                                                        <input type="radio" name="answer{{ $question->id }}" value="{{ $i }}" {{(old('answer'.($question->id)) ==  $i ) ? 'checked' : " " }}
+
+                                                            id="radioButton1" class="h-5 w-5" />
+                                                        <label for="radioButton1"
+                                                            class="pl-3 text-base font-medium text-[#07074D]">
+                                                           {{ $answer }} {{old('item'.($question->id))}}
+                                                        </label>
+                                                    </div>
+                                                    <?php $i++ ?>
+                                                @endforeach
+
+                                            </div>
+
+                                        </div>
+                                        @error("answer".($question->id))
+                                                <span class="text-danger" style="color: red">{{ $message }}</span>
                                         @enderror
-                                        <span class="text-danger">test3</span>
                                     @endif
+
                                 </div>
                             </div>
 

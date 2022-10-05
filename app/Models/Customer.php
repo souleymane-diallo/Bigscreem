@@ -20,4 +20,8 @@ class Customer extends Model
     public function answers() {
         return $this->hasMany(Answer::class);
     }
+
+    public function scopeEmail($query, $email) {
+        return $query->where('email',$email);
+    }
 }
