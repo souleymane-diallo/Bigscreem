@@ -98,13 +98,12 @@ class DashboardController extends Controller
     {
         $questions = Question::all();
 
-        return view('back.questions', compact('questions'));
+        return view('back.questionnaires', compact('questions'));
     }
 
     /**
-     * Undocumented function
-     *
-     * @return void
+     * get all answers
+     * 
      */
     public function answers()
     {
@@ -116,7 +115,7 @@ class DashboardController extends Controller
         foreach($answers as $answer) {
             $link[$answer->single_link] = Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
         }
-        // dd($link);
+        //dd($link);
         return view('back.answers',['answers' => $link, 'questions' => $questions]);
     }
 }
