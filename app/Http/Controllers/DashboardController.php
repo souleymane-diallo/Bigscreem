@@ -100,14 +100,12 @@ class DashboardController extends Controller
     {
         $questions = Question::all();
 
-        return view('back.questions', compact('questions'));
+        return view('back.questionnaires', compact('questions'));
     }
 
     /**
+     * get all answers
      *
-     * Displays a respondent's questions and answers
-     *
-     * @return void
      */
 
      public function answers()
@@ -120,6 +118,7 @@ class DashboardController extends Controller
 
             $link[$answer->single_link]= Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
         }
+
         return view('back.answers',['answers' => $link, 'questions' => $questions]);
     }
 }

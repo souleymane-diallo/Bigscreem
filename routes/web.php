@@ -25,7 +25,7 @@ Route::get('/pie', [ChartController::class, 'index']);
 
 Route::prefix('administration')->name('administration.')->middleware('auth')->group(function (){
     Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/questions', [DashboardController::class, 'questionnaires']);
+    Route::get('/questionnaires', [DashboardController::class, 'questionnaires']);
     Route::get('/answers', [DashboardController::class, 'answers']);
 });
 
