@@ -16,22 +16,24 @@
 
                             <div class="bg-gray-200 p-2 my-2 rounded-md shadow-sm">
                                 <h3 class="font-semibold">{{ $question->title }}</h3>
-                                <p> {{ $question->body }} </p>
                                 <div class="border-dashed border-2 border-gray-800 p-2 my-2">
                                     @if ($question->type === 'B')
                                         @if ($question->check_email)
-                                            <span style="color:red">{{ $mail }}</span>
+                                            <span class="text-red-700"">{{ $mail }}</span>
+                                            <label for="answer-{{ $question->id }}">{{ $question->body }}</label>
                                             <x-text-input name="answer{{ $question->id }}"
+                                                id="answer-{{ $question->id }}"
                                                 :value="old('answer1')" class="block mt-1 w-full" type="email" />
                                                 @error("answer".($question->id))
-                                                    <span class="text-danger" style="color: red">{{ $message }}</span>
+                                                    <span class="text-red-700" >{{ $message }}</span>
                                                 @enderror
                                         @else
+                                            <label for="answer-{{ $question->id }}">{{ $question->body }}</label>
                                             <x-text-input name="answer{{ $question->id }}"
-                                                id="answer{{ $question->id }}" class="block mt-1 w-full" type="text"
+                                                id="answer-{{ $question->id }}" class="block mt-1 w-full" type="text"
                                                 :value="old('answer'.($question->id))"/>
                                             @error("answer".($question->id))
-                                                <span class="text-danger" style="color: red">{{ $message }}</span>
+                                                <span class="text-red-700" >{{ $message }}</span>
                                             @enderror
                                         @endif
                                     @else
@@ -44,20 +46,19 @@
                                                     <div class="flex items-center">
                                                         <input type="radio" name="answer{{ $question->id }}" value="{{ $i }}" {{(old('answer'.($question->id)) ==  $i ) ? 'checked' : " " }}
 
-                                                            id="radioButton1" class="h-5 w-5" />
-                                                        <label for="radioButton1"
+                                                            id="answer{{ $question->id }}-{{ $i }}" class="h-5 w-5" />
+                                                        <label for="answer{{ $question->id }}-{{ $i }}"
                                                             class="pl-3 text-base font-medium text-[#07074D]">
-                                                           {{ $answer }} {{old('item'.($question->id))}}
+                                                           {{ $answer }}
                                                         </label>
                                                     </div>
                                                     <?php $i++ ?>
                                                 @endforeach
-
                                             </div>
-
                                         </div>
+                                    </div>
                                         @error("answer".($question->id))
-                                                <span class="text-danger" style="color: red">{{ $message }}</span>
+                                                <span class="text-red-700" >{{ $message }}</span>
                                         @enderror
                                     @endif
 

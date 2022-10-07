@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     /**
-     * Undocumented function
+     *
+     *Displays three pieCharts and radarChart
      *
      * @return void
      */
+
     public function index()
     {
         $pieDatas = array($this->pieChart('6'), $this->pieChart('7'), $this->pieChart('10'));
@@ -22,9 +24,9 @@ class DashboardController extends Controller
         return view('back.index', ['pieDatas' => $pieDatas, 'radarDatas' => $radarDatas]);
     }
 
+    //allows you to define the number of times an answer has been chosen in relation to a question
     public function pieChart(string $questionID)
     {
-
         $labels = Question::AnswerPossible($questionID)->pluck('possible_answer');
         $labels = explode(", ", $labels[0]);
 
@@ -51,7 +53,7 @@ class DashboardController extends Controller
             $number = 0;
 
             if(isset($answers[$value])) {
-                //dd("test",$answers[$value]);
+
                 $number = $answers[$value]->count();
 
             }
@@ -60,7 +62,7 @@ class DashboardController extends Controller
             array_push( $colors, "#".bin2hex(openssl_random_pseudo_bytes(3)) );
         }
 
-            //  dd($questionID,$question[0], $labels,$datas, $colors);
+
         return array(
             "question_id" => $questionID,
             "question" => $question[0],
@@ -70,7 +72,7 @@ class DashboardController extends Controller
         );
     }
 
-
+    //allows you to average the answers of the questions passed as parameters in the table
     public function radarChart(array $questionsID) {
 
         $labels = [];
@@ -98,27 +100,25 @@ class DashboardController extends Controller
     {
         $questions = Question::all();
 
-        return view('back.questions', compact('questions'));
+        return view('back.questionnaires', compact('questions'));
     }
 
     /**
-     * Undocumented function
+     * get all answers
      *
-     * @return void
      */
-    public function answers()
+
+     public function answers()
     {
         $questions = Question::all();
         $answers = Answer::all();
-        // dd($answers);
 
         $link = [];
-
         foreach($answers as $answer) {
-            // dd(Answer::hashPath($answer->single_link)->pluck('answer', 'question_id'));
+
             $link[$answer->single_link]= Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
         }
-        // dd($link);
+
         return view('back.answers',['answers' => $link, 'questions' => $questions]);
     }
 }

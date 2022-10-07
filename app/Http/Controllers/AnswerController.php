@@ -37,7 +37,8 @@ class AnswerController extends Controller
      * @param  \Illuminate\Http\AnswerRequest   $answerRequest
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
+    //this function takes a variable of type AnswerRequest as parameters
+    //Allows you to insert all the answers of a respondent
     public function store(AnswerRequest $answerRequest)
     {
 
@@ -45,14 +46,10 @@ class AnswerController extends Controller
         $single_link = Str::uuid()->toString();
         $email = $answerRequest->answer1;
 
-        // dd("email",$email);
-
         $email = Customer::all()->where("email", $email)->pluck("email")->implode('0 => ',);
 
-        // dd("email",$email);
         if($email){
-            //dd("je suis dans la condition");
-            // dd("test reussi");
+
             $questions = Question::all();
             $mail="L'adresse email existe déjà";
             return view('front.index', ['mail' => $mail,'questions'=> $questions]);
