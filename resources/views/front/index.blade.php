@@ -29,26 +29,11 @@
                                                 <div class="text-red-700 mt-1" >{{ $message }}</div>
                                             @enderror
                                     @else
-                                        <div class="mb-5">
-                                            <div class="flex items-center space-x-6">
-                                                <?php $i=1 ?>
-                                                @foreach (explode(',', $question->possible_answer) as $answer)
-
-
-                                                    <div class="flex items-center">
-                                                        <input type="radio" name="answer{{ $question->id }}" value="{{ $i }}" {{(old('answer'.($question->id)) ==  $i ) ? 'checked' : " " }}
-
-                                                            id="answer{{ $question->id }}-{{ $i }}" class="h-5 w-5" />
-                                                        <label for="answer{{ $question->id }}-{{ $i }}"
-                                                            class="pl-3 text-base font-medium text-[#07074D]">
-                                                           {{ $answer }}
-                                                        </label>
-                                                    </div>
-                                                    <?php $i++ ?>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
+                                        <label aria-label="{{ $question->body }}" for="answer-{{ $question->id }}">{{ $question->body }}</label>
+                                        <x-text-input name="answer{{ $question->id }}"
+                                            aria-required="true"
+                                            id="answer-{{ $question->id }}" class="block mt-1 w-full" type="text"
+                                            :value="old('answer'.($question->id))"/>
                                         @error("answer".($question->id))
                                             <div class="text-red-700 mt-1" >{{ $message }}</div>
                                         @enderror
