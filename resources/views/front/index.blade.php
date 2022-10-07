@@ -51,7 +51,6 @@
                                                 <?php $i++ ?>
                                             @endforeach
                                         </div>
-
                                     </div>
                                         @error("answer".($question->id))
                                                 <span class="text-danger" style="color: red">{{ $message }}</span>

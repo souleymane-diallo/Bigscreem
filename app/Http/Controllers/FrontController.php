@@ -41,7 +41,7 @@ class FrontController extends Controller
      */
     public function message()
     {
-        //dd("redirection reussi");
+    
         return view('front.message');
 
     }
