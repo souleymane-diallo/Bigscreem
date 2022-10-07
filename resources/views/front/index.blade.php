@@ -15,7 +15,7 @@
                     @forelse ($questions as $question)
 
                         <div class="bg-gray-200 p-2 my-2 rounded-md shadow-sm">
-                            <h3 class="font-semibold">{{ $question->title }}</h3>
+                            <h2 class="font-semibold">{{ $question->title }}</h2>
                             <div class="border-dashed border-2 border-gray-800 p-2 my-2">
                                 @if ($question->type === 'B')
                                     @if ($question->check_email)
