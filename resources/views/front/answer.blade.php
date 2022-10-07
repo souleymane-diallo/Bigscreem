@@ -5,9 +5,9 @@
                 <div class="mb-2">
                     <img src="{{ asset('image/bigscreen_logo.png') }}" alt="logo BigScreen" width=250 />
                 </div>
+                <h1 role="heading" aria-level="h1" class="fon-semibold text-1xl mb-4 text-white">Votre trouverez ci-dessous les réponses que avez apportés à
+                    notre sondage </h1>
                     @foreach ($questions as $question)
-                    <h1 role="heading" aria-level="h1" class="fon-semibold text-1xl mb-4 text-white">Votre trouverez ci-dessous les réponses que avez apportés à
-                    notre sondage le {{ $question->created_at}}</h1>
                         <div class="bg-gray-200 p-2 my-2 rounded-md shadow-sm">
                             <h2 class="font-semibold">{{ $question->title }}</h2>
                             <p> {{ $question->body }} </p>
