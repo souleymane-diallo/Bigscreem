@@ -49,7 +49,7 @@
                 <p>Aucune réponse !</p>
                 @endforelse
             </div>
-            <!--{{ $answers->links() }} -->
+
         </div>
     </div>
     <!-- ./Client Table -->
