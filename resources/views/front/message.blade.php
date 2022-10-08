@@ -10,7 +10,7 @@
                                 votre investissement, nous vous préparons une application toujours plus
                                 facile à utiliser, seul ou en famille.
                                 Si vous désirez consulter vos réponse ultérieurement, vous pouvez consultez
-                                cette adresse : <a href=' {{ session('url') }}' />{{ session('url') }}</a></p>
+                                cette adresse : <a href='answer/{{ session('url') }}' />{{ session('url') }}</a></p>
                             <button type="button" id="close_notif" class="close" data-dismiss="alert"
                                 aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
