@@ -16,9 +16,9 @@ class DashboardController extends Controller
     public function index()
     {
         $pieDatas = array($this->pieChart('6'), $this->pieChart('7'), $this->pieChart('10'));
-        // dd("données pieDatas",$pieDatas);
-         $radarDatas = $this->radarChart(array('11', '12', '13', '14', '15'));
-         // dd( $radarDatas);
+        
+        $radarDatas = $this->radarChart(array('11', '12', '13', '14', '15'));
+        
         return view('back.index', ['pieDatas' => $pieDatas, 'radarDatas' => $radarDatas]);
     }
 
@@ -60,7 +60,6 @@ class DashboardController extends Controller
             array_push( $colors, "#".bin2hex(openssl_random_pseudo_bytes(3)) );
         }
 
-            //  dd($questionID,$question[0], $labels,$datas, $colors);
         return array(
             "question_id" => $questionID,
             "question" => $question[0],
@@ -104,20 +103,19 @@ class DashboardController extends Controller
     /**
      * get all answers
      * 
-     */
+    */
+
     public function answers()
     {
         $questions = Question::all();
         $answers = Answer::all();
-        // dd($answers);
-
+        
         $link = [];
 
         foreach($answers as $answer) {
-            // dd(Answer::hashPath($answer->single_link)->pluck('answer', 'question_id'));
-            $link[$answer->single_link]= Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
+            $link[$answer->single_link] = Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
         }
-        //dd($link);
+
         return view('back.answers',['answers' => $link, 'questions' => $questions]);
     }
 }
