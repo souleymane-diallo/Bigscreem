@@ -55,26 +55,28 @@ class AnswerController extends Controller
             return view('front.index', ['mail' => $mail,'questions'=> $questions]);
         }else{
 
-                $Customer = Customer::create([
-                    'email' => $answerRequest->answer1,
-                ]);
-                $customers = Customer::all();
-                foreach($customers as $customer) {
-                    // dd(Answer::hashPath($answer->single_link)->pluck('answer', 'question_id'));
-                    $emailId= Customer::Email($customer->email)->pluck('id');
-                }
-                $questions = Question::all();
-                foreach ($questions as $key => $question) {
-                    $answer = new Answer();
-                    $answer->answer = $answerRequest->input('answer'.$question->id);
-                    $answer->question_id = $key + 1;
-                    $answer->customer_id =$emailId[0];
-                    $answer->single_link = $single_link;
-                    $answer->save();
+            $Customer = Customer::create([
+                'email' => $answerRequest->answer1,
+            ]);
+
+            $customers = Customer::all();
+
+            foreach($customers as $customer) {
+                $emailId= Customer::Email($customer->email)->pluck('id');
+            }
+
+            $questions = Question::all();
+
+            foreach ($questions as $key => $question) {
+                $answer = new Answer();
+                $answer->answer = $answerRequest->input('answer'.$question->id);
+                $answer->question_id = $key + 1;
+                $answer->customer_id =$emailId[0];
+                $answer->single_link = $single_link;
+                $answer->save();
                 }
 
             return redirect('/message')->with('url', $single_link);
-            dd("après la redirection");
         }
     }
 

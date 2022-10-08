@@ -13,7 +13,6 @@
                             <th class="px-4 py-3">Réponses</th>
                         </tr>
                     </thead>
-                    {{-- @forelse($answers as $answer) --}}
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
                             @forelse($questions as $question)
                                 <tr
@@ -44,17 +43,14 @@
                                 <tr>Aucune réponse...</tr>
                             @endforelse
                         </tbody>
-
                 </table>
                 <div  style="padding-top: 30px"></div>
                 @empty
-                <p>Non...</p>
+                <p>Aucune réponse !</p>
                 @endforelse
-
             </div>
+            <!--{{ $answers->links() }} -->
         </div>
     </div>
-
-
     <!-- ./Client Table -->
 </x-app-layout>

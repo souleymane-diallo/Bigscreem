@@ -18,9 +18,9 @@ class DashboardController extends Controller
     public function index()
     {
         $pieDatas = array($this->pieChart('6'), $this->pieChart('7'), $this->pieChart('10'));
-        // dd("données pieDatas",$pieDatas);
-         $radarDatas = $this->radarChart(array('11', '12', '13', '14', '15'));
-         // dd( $radarDatas);
+
+        $radarDatas = $this->radarChart(array('11', '12', '13', '14', '15'));
+
         return view('back.index', ['pieDatas' => $pieDatas, 'radarDatas' => $radarDatas]);
     }
 
@@ -61,7 +61,6 @@ class DashboardController extends Controller
             array_push( $datas, $number);
             array_push( $colors, "#".bin2hex(openssl_random_pseudo_bytes(3)) );
         }
-
 
         return array(
             "question_id" => $questionID,
@@ -106,17 +105,16 @@ class DashboardController extends Controller
     /**
      * get all answers
      *
-     */
+    */
 
-     public function answers()
+    public function answers()
     {
         $questions = Question::all();
         $answers = Answer::all();
 
         $link = [];
         foreach($answers as $answer) {
-
-            $link[$answer->single_link]= Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
+            $link[$answer->single_link] = Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
         }
 
         return view('back.answers',['answers' => $link, 'questions' => $questions]);

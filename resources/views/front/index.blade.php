@@ -40,14 +40,13 @@
                                     @endif
                                 @else
                                     <div>
+                                        <p class="mb-2">{{ $question->body }}</p>
                                         <div class="flex items-center space-x-6">
                                             <?php $i=1 ?>
                                             @foreach (explode(',', $question->possible_answer) as $answer)
-
-
                                                 <div class="flex items-center">
                                                     <input type="radio" role="radio"
-                                                        name="answer{{ $question->id }}" value="{{ $i }}"
+                                                        name="answer{{ $question->id }}" value="{{ $answer }}"
                                                         {{(old('answer'.($question->id)) ==  $i ) ? 'checked' : " " }}
                                                         aria-required="true"
                                                         id="answer{{ $question->id }}-{{ $i }}" class="h-5 w-5" />
