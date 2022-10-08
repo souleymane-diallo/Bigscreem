@@ -44,16 +44,12 @@ class AnswerRequest extends FormRequest
             'answer18'   => 'required',
             'answer19'   => 'required',
             'answer20'   => 'required',
-
-            // 'answerA.*'  => 'required',
-            // 'answerB.*'  => 'required|min:1|max:255',
-            // 'answerC.*'  => 'required|regex:/[1-5]/'
         ];
     }
     public function messages()
     {
         return [
-            'answer1.required'    => 'Ce champ est obligatoire !',
+            'answer1.required'    => 'Ce champ adresse mail est obligatoire !',
             'answer2.required'    => 'Ce champ est obligatoire !',
             'answer3.required'    => 'Ce champ est obligatoire !',
             'answer4.required'    => 'Ce champ est obligatoire !',
