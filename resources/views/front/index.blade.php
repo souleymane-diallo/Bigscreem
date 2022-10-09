@@ -46,20 +46,17 @@
                                             @foreach (explode(',', $question->possible_answer) as $answer)
                                                 <div class="flex items-center">
                                                     <input type="radio" role="radio"
-                                                        name="answer{{ $question->id }}" value="{{ $answer }}"
-                                                        {{(old('answer'.($question->id)) ==  $i ) ? 'checked' : " " }}
+                                                        name="answer{{ $question->id }}" value="{{$answer}}"
+                                                        {{old('answer'.($question->id)) == $answer ? 'checked' : " " }}
                                                         aria-required="true"
                                                         id="answer{{ $question->id }}-{{ $i }}" class="h-5 w-5" />
                                                     <label for="answer{{ $question->id }}-{{ $i }}"
                                                         class="pl-3 text-base font-medium text-[#07074D]">
                                                         {{ $answer }}
-                                                    </label>
                                                 </div>
                                                 <?php $i++ ?>
                                             @endforeach
-
                                         </div>
-
                                     </div>
                                     @error("answer".($question->id))
                                             <div class="text-red-700 mt-1" role="error">{{ $message }}</div>
