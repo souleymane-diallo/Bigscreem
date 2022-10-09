@@ -25,7 +25,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SurveyTableSeeder::class,
-            QuestionTableSeeder::class
+            QuestionTableSeeder::class,
+            CustomerTableSeeder::class,
+            AnswerTableSeeder::class
         ]);
     }
 }
