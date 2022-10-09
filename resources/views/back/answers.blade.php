@@ -1,10 +1,10 @@
 <x-app-layout>
-    <!-- Client Table Reponses -->
+    <!-- Admin Table Reponses -->
     <div class="mt-20 mx-4">
         <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
-                @forelse($answers as $answer)
-                <table class="w-full">
+                @forelse($link as $answer)
+                <table class="w-full mt-4">
                     <thead>
                         <tr
                             class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
@@ -44,13 +44,12 @@
                             @endforelse
                         </tbody>
                 </table>
-                <div  style="padding-top: 30px"></div>
                 @empty
                 <p>Aucune réponse !</p>
                 @endforelse
             </div>
-
+            <div class="mt-2">{{ $answers->links()}}</div>
         </div>
     </div>
-    <!-- ./Client Table -->
+    <!-- ./Admin  Table -->
 </x-app-layout>

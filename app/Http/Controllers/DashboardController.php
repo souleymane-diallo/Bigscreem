@@ -112,14 +112,16 @@ class DashboardController extends Controller
 
     public function answers()
     {
+        // get all questions
         $questions = Question::all();
-        $answers = Answer::all();
-
+        // get all answers
+        $answers = Answer::latest()->paginate(40);
+      
         $link = [];
         foreach($answers as $answer) {
             $link[$answer->single_link] = Answer::hashPath($answer->single_link)->pluck('answer', 'question_id');
         }
-
-        return view('back.answers',['answers' => $link, 'questions' => $questions]);
+        
+        return view('back.answers', compact('answers', 'questions', 'link'));
     }
 }
