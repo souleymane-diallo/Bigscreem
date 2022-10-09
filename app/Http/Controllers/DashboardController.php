@@ -28,7 +28,8 @@ class DashboardController extends Controller
     public function pieChart(string $questionID)
     {
         $labels = Question::AnswerPossible($questionID)->pluck('possible_answer');
-        $labels = explode(", ", $labels[0]);
+
+        $labels = explode(",", $labels[0]);
 
         /**
          * Get the question
@@ -44,6 +45,7 @@ class DashboardController extends Controller
 
         $colors = [];
 
+
         /**
          * Foreach labels define :
          *  - $number => how many this response was choose
@@ -55,11 +57,12 @@ class DashboardController extends Controller
             if(isset($answers[$value])) {
 
                 $number = $answers[$value]->count();
+                array_push( $datas, $number);
+                array_push( $colors, "#".bin2hex(openssl_random_pseudo_bytes(3)) );
 
             }
 
-            array_push( $datas, $number);
-            array_push( $colors, "#".bin2hex(openssl_random_pseudo_bytes(3)) );
+
         }
 
         return array(
