@@ -42,31 +42,34 @@ class AnswerController extends Controller
     public function store(AnswerRequest $answerRequest)
     {
 
-
+        //  create a unique identifier
         $single_link = Str::uuid()->toString();
+
+        //  get email
         $email = $answerRequest->answer1;
 
+
         $email = Customer::all()->where("email", $email)->pluck("email")->implode('0 => ',);
-
+        //  chech if email exists
         if($email){
-
+            // if exists return message
             $questions = Question::all();
             $mail="L'adresse email existe déjà";
             return view('front.index', ['mail' => $mail,'questions'=> $questions]);
         }else{
-
+            // create a custermer
             $Customer = Customer::create([
                 'email' => $answerRequest->answer1,
             ]);
 
             $customers = Customer::all();
-
+            // get id custormer
             foreach($customers as $customer) {
                 $emailId= Customer::Email($customer->email)->pluck('id');
             }
 
             $questions = Question::all();
-
+            // insert all answers
             foreach ($questions as $key => $question) {
                 $answer = new Answer();
                 $answer->answer = $answerRequest->input('answer'.$question->id);
