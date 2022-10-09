@@ -4,7 +4,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     @if (session('url'))
-                        <div class="alert alert-success alert-dismissible fade show" id="notif-bar" style="margin-top:8px"
+                        <div class="alert alert-success alert-dismissible fade show" id="notif-bar"
                             role="alert">
                             <p>"Toute l’équipe de Bigscreen vous remercie pour votre engagement. Grâce à
                                 votre investissement, nous vous préparons une application toujours plus
@@ -13,7 +13,7 @@
                                 cette adresse : <a href='answer/{{ session('url') }}' />{{ session('url') }}</a></p>
                             <button type="button" id="close_notif" class="close" data-dismiss="alert"
                                 aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true" class="">X</span>
                             </button>
                         </div>
                     @endif
