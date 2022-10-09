@@ -7,7 +7,8 @@
                 </div>
                 <div class="mb-5">
                     <h1 role="heading" aria-level="h1" class="fon-semibold text-1xl text-white">Merci de repondre à toutes les questions et de
-                        valider le formulaire en bas de page.</h3>
+                        valider le formulaire en bas de page.
+                    </h3>
                 </div>
                 <!-- Form surveys -->
                 <form action="{{ route('answer.store') }}" method="POST" role="form">
@@ -20,16 +21,24 @@
                                 @if ($question->type === 'B')
                                     @if ($question->check_email)
                                         <div class="text-red-700"">{{ $mail }}</div>
-                                        <label aria-label="{{ $question->body }}" for="answer-{{ $question->id }}">{{ $question->body }}</label>
+                                        <label aria-label="{{ $question->body }}" 
+                                            aria-required="true"
+                                            for="answer-{{ $question->id }}">
+                                            {{ $question->body }}<span class="text-red-800 text-lg">*</span>
+                                        </label>
                                         <x-text-input name="answer{{ $question->id }}"
                                             id="answer-{{ $question->id }}"
                                             aria-required="true"
                                             :value="old('answer1')" class="block mt-1 w-full" type="email" />
                                             @error("answer".($question->id))
-                                                <div class="text-red-700 mt-1" >{{ $message }}</div>
+                                                <div class="text-red-700 mt-1" role="error">{{ $message }}</div>
                                             @enderror
                                     @else
-                                        <label aria-label="{{ $question->body }}" for="answer-{{ $question->id }}">{{ $question->body }}</label>
+                                        <label aria-label="{{ $question->body }}" 
+                                            aria-required="true"
+                                            for="answer-{{ $question->id }}">
+                                            {{ $question->body }}<span class="text-red-800 text-lg">*</span>
+                                        </label>
                                         <x-text-input name="answer{{ $question->id }}"
                                             aria-required="true"
                                             id="answer-{{ $question->id }}" class="block mt-1 w-full" type="text"
@@ -40,7 +49,9 @@
                                     @endif
                                 @else
                                     <div>
-                                        <p class="mb-2">{{ $question->body }}</p>
+                                        <p class="mb-2">
+                                            {{ $question->body }}<span class="text-red-800 text-lg">*</span>
+                                        </p>
                                         <div class="flex items-center space-x-6">
                                             <?php $i=1 ?>
                                             @foreach (explode(',', $question->possible_answer) as $answer)
