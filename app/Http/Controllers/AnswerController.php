@@ -41,14 +41,10 @@ class AnswerController extends Controller
     //Allows you to insert all the answers of a respondent
     public function store(AnswerRequest $answerRequest)
     {
-
         //  create a unique identifier
         $single_link = Str::uuid()->toString();
-
         //  get email
         $email = $answerRequest->answer1;
-
-
         $email = Customer::all()->where("email", $email)->pluck("email")->implode('0 => ',);
         //  chech if email exists
         if($email){
@@ -61,13 +57,11 @@ class AnswerController extends Controller
             $Customer = Customer::create([
                 'email' => $answerRequest->answer1,
             ]);
-
             $customers = Customer::all();
             // get id custormer
             foreach($customers as $customer) {
                 $emailId= Customer::Email($customer->email)->pluck('id');
             }
-
             $questions = Question::all();
             // insert all answers
             foreach ($questions as $key => $question) {
@@ -78,7 +72,6 @@ class AnswerController extends Controller
                 $answer->single_link = $single_link;
                 $answer->save();
                 }
-
             return redirect('/message')->with('url', $single_link);
         }
     }
