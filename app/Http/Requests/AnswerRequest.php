@@ -42,7 +42,8 @@ class AnswerRequest extends FormRequest
             'answer16'   => 'required',
             'answer17'   => 'required',
             'answer18'   => 'required',
-            'answer19'   => 'required|string',
+            'answer19'   => 'required',
+            'answer20'   => 'required|string',
         ];
     }
     public function messages()
