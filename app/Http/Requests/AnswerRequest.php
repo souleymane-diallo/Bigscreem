@@ -25,10 +25,10 @@ class AnswerRequest extends FormRequest
     {
         return [
 			'answer1'    => 'required|email',
-            'answer2'    => 'required',
+            'answer2'    => 'required|integer|min:1',
             'answer3'    => 'required',
             'answer4'    => 'required',
-            'answer5'    => 'required',
+            'answer5'    => 'required|string',
             'answer6'    => 'required',
             'answer7'    => 'required',
             'answer8'    => 'required',
@@ -42,8 +42,7 @@ class AnswerRequest extends FormRequest
             'answer16'   => 'required',
             'answer17'   => 'required',
             'answer18'   => 'required',
-            'answer19'   => 'required',
-            'answer20'   => 'required',
+            'answer19'   => 'required|string',
         ];
     }
     public function messages()
@@ -51,6 +50,7 @@ class AnswerRequest extends FormRequest
         return [
             'answer1.required'    => 'Ce champ adresse mail est obligatoire !',
             'answer2.required'    => 'Ce champ est obligatoire !',
+            'answer2.integer'    => 'Ce champ doit être un entier !',
             'answer3.required'    => 'Ce champ est obligatoire !',
             'answer4.required'    => 'Ce champ est obligatoire !',
             'answer5.required'    => 'Ce champ est obligatoire !',
