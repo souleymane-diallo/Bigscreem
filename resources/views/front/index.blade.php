@@ -6,7 +6,7 @@
                     <img src="{{ asset('image/bigscreen_logo.png') }}" alt="logo BigScreen" width="250" height="20" />
                 </div>
                 <div class="mb-5">
-                    <h1 role="heading" aria-level="h1" class="fon-semibold text-1xl text-white">Merci de repondre à toutes les questions et de
+                    <h1 role="heading" class="fon-semibold text-1xl text-white">Merci de repondre à toutes les questions et de
                         valider le formulaire en bas de page.
                     </h3>
                 </div>
@@ -22,7 +22,6 @@
                                     @if ($question->check_email)
                                         <div class="text-red-700"">{{ $mail }}</div>
                                         <label aria-label="{{ $question->body }}" 
-                                            aria-required="true"
                                             for="answer-{{ $question->id }}">
                                             {{ $question->body }}<span class="text-red-800 text-lg">*</span>
                                         </label>
@@ -35,7 +34,6 @@
                                             @enderror
                                     @else
                                         <label aria-label="{{ $question->body }}" 
-                                            aria-required="true"
                                             for="answer-{{ $question->id }}">
                                             {{ $question->body }}<span class="text-red-800 text-lg">*</span>
                                         </label>
@@ -52,7 +50,7 @@
                                         <p class="mb-2">
                                             {{ $question->body }}<span class="text-red-800 text-lg">*</span>
                                         </p>
-                                        <div class="flex items-center space-x-6">
+                                        <div class="flex items-center flex-wrap space-x-6">
                                             <?php $i=1 ?>
                                             @foreach (explode(',', $question->possible_answer) as $answer)
                                                 <div class="flex items-center">
@@ -62,8 +60,10 @@
                                                         aria-required="true"
                                                         id="answer{{ $question->id }}-{{ $i }}" class="h-5 w-5" />
                                                     <label for="answer{{ $question->id }}-{{ $i }}"
+                                                        aria-label="{{ $answer }}"
                                                         class="pl-3 text-base font-medium text-[#07074D]">
                                                         {{ $answer }}
+                                                    </label>
                                                 </div>
                                                 <?php $i++ ?>
                                             @endforeach
